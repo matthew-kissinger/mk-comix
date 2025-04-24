@@ -9,7 +9,7 @@ import comicFilenames from '@/lib/comicFilenames.json'; // Import the generated 
 // Generate initial comic data using the imported filenames
 const initialComics = comicFilenames.map((filename, i) => ({
   id: i + 1,
-  src: `/comics/${filename}`, // Construct the correct URL
+  src: `comics/${filename}`, // Remove leading slash
   alt: filename.split("_generate_")[0].replace(/-/g, " ").replace(/_/g, " ") || `Comic ${i + 1}`, // Basic alt text from filename
 }))
 
