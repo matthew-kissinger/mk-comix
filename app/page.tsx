@@ -50,7 +50,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto">
         <header className="mb-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">MK Comix</h1>
-          <p className="text-gray-600 mb-4">A synthetic sense of humor—MK's AI-born comic experiments.</p>
+          <p className="text-gray-600 mb-4">A synthetic sense of humor—MK&apos;s AI-born comic experiments.</p>
           <Button onClick={shuffleComics} className="bg-purple-600 hover:bg-purple-700 text-white">
             <Shuffle className="h-4 w-4 mr-2" />
             Randomize
