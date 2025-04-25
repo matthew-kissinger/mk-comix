@@ -6,12 +6,25 @@ import { ChevronLeft, ChevronRight, X, Shuffle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import comicFilenames from '@/lib/comicFilenames.json'; // Import the generated JSON
 
+// Utility function for shuffling an array (Fisher-Yates algorithm)
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
 // Generate initial comic data using the imported filenames
-const initialComics = comicFilenames.map((filename, i) => ({
+const createComicData = () => comicFilenames.map((filename, i) => ({
   id: i + 1,
-  src: `comics/${filename}`, // Remove leading slash
-  alt: filename.split("_generate_")[0].replace(/-/g, " ").replace(/_/g, " ") || `Comic ${i + 1}`, // Basic alt text from filename
+  src: `comics/${filename}`,
+  alt: filename.split("_generate_")[0].replace(/-/g, " ").replace(/_/g, " ") || `Comic ${i + 1}`,
 }))
+
+// Create and shuffle initial comics data
+const initialComics = shuffleArray(createComicData())
 
 export default function Home() {
   const [comics, setComics] = useState(initialComics)
@@ -36,13 +49,7 @@ export default function Home() {
   }, [selectedComic, comics.length])
 
   const shuffleComics = () => {
-    // Fisher-Yates shuffle algorithm
-    const shuffled = [...comics]
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-    }
-    setComics(shuffled)
+    setComics(shuffleArray(comics))
   }
 
   return (
